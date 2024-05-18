@@ -17,15 +17,6 @@ public class Domador {
 		this.equipo=new ArrayList<>();
 		getEquipo().add(new Digimon());
 		setEquipo(equipo);
-		
-		getEquipo().add(new Digimon());
-		setEquipo(equipo);
-		
-		getEquipo().add(new Digimon());
-		setEquipo(equipo);
-		
-		getEquipo().add(new Digimon());
-		setEquipo(equipo);
 	}
 
 	// Metodos
