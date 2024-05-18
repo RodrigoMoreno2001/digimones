@@ -8,15 +8,18 @@ public class Domador {
 	
 	private String nombre;
 	private ArrayList<Digimon> equipo;
+	private int digimonActual;
 	
 	// constructores
 	
 	public Domador(String nombre) {
 		
 		this.nombre=nombre;
+		this.digimonActual=0;
 		this.equipo=new ArrayList<>();
 		getEquipo().add(new Digimon());
 		setEquipo(equipo);
+		
 	}
 
 	// Metodos
@@ -51,6 +54,65 @@ public class Domador {
 		
 	}
 	
+	public void liberarDigimon() {
+		
+		System.out.println("Qué digimon quiere dejar ir...");
+		listarEquipo();
+		System.out.println("0.- Cancelar");
+		
+		int opt=Teclado.nextInt();
+		
+		if(opt==(digimonActual+1)) {
+			System.out.println("No puedes liberar al digimon que estás usando...");
+			return;
+		}
+		
+		if(opt==0) {
+			return;
+		}else if(opt<0||opt>equipo.size()) {
+			System.out.println("Ese digimon no existe");
+			return;
+		}
+		
+		Digimon aux=equipo.remove(opt-1);
+		
+		if((opt-1)<digimonActual) digimonActual--;
+		
+		System.out.println("Has liberado a tu: "+aux);
+	}
+
+	public void cambiarDigimon() {
+		
+		System.out.println("Elige el próximo combatiente...");
+		listarEquipo();
+		System.out.println("0.- Cancelar");
+		
+		int opt=Teclado.nextInt();
+		
+		if(opt==(digimonActual+1)) {
+			System.out.println("No puedes cambiar al digimon que estás usando...");
+			return;
+		}
+		
+		if(opt==0) {
+			return;
+		}else if(opt<0||opt>equipo.size()) {
+			System.out.println("Ese digimon no existe");
+			return;
+		}
+		
+		this.digimonActual=opt-1;
+		
+	}
+	
+	public void listarEquipo() {
+		
+		for(int i=0;i<equipo.size();i++) {
+			System.out.println(" "+(i+1)+".-"+equipo.get(i));
+		}
+		
+	}
+	
 	// Getters&Setters
 	
 	public String getNombre() {
@@ -67,6 +129,14 @@ public class Domador {
 
 	public void setEquipo(ArrayList<Digimon> equipo) {
 		this.equipo = equipo;
+	}
+	
+	public int getDigimonActual() {
+		return digimonActual;
+	}
+
+	public void setDigimonActual(int digimonActual) {
+		this.digimonActual = digimonActual;
 	}
 	
 	public String toString() {

@@ -2,25 +2,29 @@ package digimones;
 
 public class BatallaDigital {
 	
+	// Atributos
+	
 	private Domador jugador;
 	private Digimon rival;
-	private int digimonActual;
 	private boolean captura;
+	
+	// Constructores
 	
 	public BatallaDigital(Domador jugador) {
 		
 		this.jugador=jugador;
 		this.rival=new Digimon();
-		this.digimonActual=0;
-		this.captura=true;
+		this.captura=false;
 		
 	}
 	
-	
+	// Metodos
 	
 	public void batalla() {
 		int opt=-1;
-		while(rival.getSalud()>0 && jugador.estanVivos()&&captura) {
+		do {
+			
+			System.out.println("Estás contra: "+rival);
 			
 			System.out.println("""
 					1.- Luchar
@@ -36,17 +40,17 @@ public class BatallaDigital {
 					lucha();
 					break;
 				case 2:
-					cambiarDigimon();
+					jugador.cambiarDigimon();
 					break;
 				case 3:
-					liberarDigimon();
+					jugador.liberarDigimon();
 					break;
 				default:
 					System.out.println("Esa opción no existe...");
 					break;
 			}
 			
-		}				
+		}while(rival.getSalud()>0 && jugador.estanVivos()&&!captura);				
 	}
 
 	private void lucha() {
@@ -58,41 +62,18 @@ public class BatallaDigital {
 				""");
 		switch(Teclado.nextInt()) {
 			case 1:
-				jugador.getEquipo().get(digimonActual).atkDP1(rival);
+				jugador.getEquipo().get(jugador.getDigimonActual()).atkDP1(rival);
 				break;
 			case 2:
-				jugador.getEquipo().get(digimonActual).atkDP2(rival);
+				jugador.getEquipo().get(jugador.getDigimonActual()).atkDP2(rival);
 				break;
 			case 3:
-				jugador.capturarDigimon(rival);
+				if(jugador.capturarDigimon(rival)) captura=true;
 				break;
 			default:
 				System.out.println("Elige una opción válida...");
 				break;
 		}
-
-	}
-
-
-
-	private void liberarDigimon() {
-		
-		System.out.println("Qué digimon quiere dejar ir...");
-		listarEquipo();
-		
-	}
-
-	private void listarEquipo() {
-		
-		for(int i=0;i<jugador.getEquipo().size();i++) {
-			System.out.println((i+1)+".- "+jugador.getEquipo().get(i));
-		}
-	}
-
-	private void cambiarDigimon() {
-		System.out.println("Elige el próximo combatiente");
-		listarEquipo();
-		
 	}
 	
 }

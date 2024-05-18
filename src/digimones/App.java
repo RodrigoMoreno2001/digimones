@@ -5,7 +5,7 @@ public class App {
 	public static void main(String[] args) {
 		
 		int menuPrincipal=-1;
-		
+		BatallaDigital bd=null;
 		System.out.println("Introduce tu nombre de domador");
 		
 		Domador jugador=new Domador(Teclado.nextLine());
@@ -24,8 +24,11 @@ public class App {
 			 
 			 switch(menuPrincipal) {
 				 case 1:
-					 BatallaDigital bd=new BatallaDigital(jugador);
+					 
+					 bd=new BatallaDigital(jugador);
 					 bd.batalla();
+					 bd=null;
+					 
 					 break;
 				 case 2:
 					 System.out.println("Saliendo...");
