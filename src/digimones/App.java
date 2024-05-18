@@ -10,18 +10,22 @@ public class App {
 		
 		Domador jugador=new Domador(Teclado.nextLine());
 
-		System.out.println(jugador);
-		
-		System.out.println("menu");
-		
-		menuPrincipal=Teclado.nextInt();
-		
+		System.out.println("Has recibido un digimon inicial!!!");
+		System.out.println(jugador.getEquipo().get(0));
 		
 		 do{
 			
+			System.out.println("""
+					1.- Siguiente batalla
+					2.- Salir
+					""");
+				
+			menuPrincipal=Teclado.nextInt();
+			 
 			 switch(menuPrincipal) {
 				 case 1:
-					 BatallaDigital bd=new BatallaDigital();
+					 BatallaDigital bd=new BatallaDigital(jugador);
+					 bd.batalla();
 					 break;
 				 case 2:
 					 System.out.println("Saliendo...");

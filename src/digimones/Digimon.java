@@ -33,7 +33,6 @@ public class Digimon {
 	public void atkDP1(Digimon rival) {
 		
 		this.dp1-=1;
-		
 		rival.setSalud(rival.getSalud()-this.ataque);
 		
 	}
@@ -41,6 +40,7 @@ public class Digimon {
 	public void atkDP2(Digimon rival) {
 		
 		this.dp2-=2;
+		rival.setSalud(rival.getSalud()-this.ataque*2);
 		
 	}
 	
@@ -97,7 +97,9 @@ public class Digimon {
 	
 	@Override
 	public String toString() {
-		return nombre;
+
+		return " "+nombre+" LVL: "+nivel+" ATK: "+ataque+" HP: "+salud+" DP1: "+dp1+" DP2: "+dp2+"\n";
+		
 	}
 	
 	
