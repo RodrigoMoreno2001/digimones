@@ -120,7 +120,4 @@ public class Digimon {
 		return nombre+" LVL: "+nivel+" ATK: "+ataque+" HP: "+salud+" DP1: "+dp1+" DP2: "+dp2;
 		
 	}
-	
-	
-	
 }

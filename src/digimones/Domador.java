@@ -123,6 +123,12 @@ public class Domador {
 	
 	// Getters&Setters
 	
+	public Digimon getDigimonCombatiente() {
+		
+		return equipo.get(digimonActual);
+		
+	}
+	
 	public String getNombre() {
 		return nombre;
 	}
@@ -139,7 +145,7 @@ public class Domador {
 		this.equipo = equipo;
 	}
 	
-	public int getDigimonActual() {
+	public int getDigimonActua() {
 		return digimonActual;
 	}
 

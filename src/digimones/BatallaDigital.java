@@ -24,10 +24,10 @@ public class BatallaDigital {
 		int opt=-1;
 		while(rival.getSalud()>0 && jugador.estanVivos()&&!captura) {
 			
-			while(jugador.getEquipo().get(jugador.getDigimonActual()).getSalud()<=0) jugador.cambiarDigimon();
+			while(jugador.getDigimonCombatiente().getSalud()<=0) jugador.cambiarDigimon();
 			
 			System.out.println("Estás contra: "+rival.getNombre()+" LVL: "+rival.getNivel()+" HP: "+rival.getSalud());
-			System.out.println("Qué debería hacer "+jugador.getEquipo().get(jugador.getDigimonActual())+"\n");
+			System.out.println("Digimon combatiente: "+jugador.getDigimonCombatiente()+"\n");
 			
 			System.out.println("""
 					1.- Luchar
@@ -61,8 +61,8 @@ public class BatallaDigital {
 			System.out.println("Has derrotado a un "+rival.getNombre()+" LVL "+rival.getNivel()+"...");
 		}
 		
-		if(jugador.getEquipo().get(jugador.getDigimonActual()).getSalud()<=0) {
-			System.out.println("Tu "+jugador.getEquipo().get(jugador.getDigimonActual()).getNombre()+" LVL: "+jugador.getEquipo().get(jugador.getDigimonActual()).getNivel()+" ha sido derrotado...");
+		if(jugador.getDigimonCombatiente().getSalud()<=0) {
+			System.out.println("Tu "+jugador.getDigimonCombatiente().getNombre()+" LVL: "+jugador.getDigimonCombatiente().getNivel()+" ha sido derrotado...");
 		}
 		
 		if(!jugador.estanVivos()) {
@@ -85,14 +85,14 @@ public class BatallaDigital {
 		}
 		
 		if(random==5) {
-			System.out.println("Tu "+jugador.getEquipo().get(jugador.getDigimonActual()).getNombre()+" LVL: "+jugador.getEquipo().get(jugador.getDigimonActual()).getNivel()+" ha esquivado el ataque enemigo...");
+			System.out.println("Tu "+jugador.getDigimonCombatiente().getNombre()+" LVL: "+jugador.getDigimonCombatiente().getNivel()+" ha esquivado el ataque enemigo...");
 			return;
 		}
 		
 		if(random%2==0) {
-			rival.atkDP1(jugador.getEquipo().get(jugador.getDigimonActual()));
+			rival.atkDP1(jugador.getDigimonCombatiente());
 		}else {
-			rival.atkDP2(jugador.getEquipo().get(jugador.getDigimonActual()));
+			rival.atkDP2(jugador.getDigimonCombatiente());
 		}
 			
 	}
@@ -113,10 +113,10 @@ public class BatallaDigital {
 				case 0:
 					return false;
 				case 1:
-					turnoRealizado=jugador.getEquipo().get(jugador.getDigimonActual()).atkDP1(rival);
+					turnoRealizado=jugador.getDigimonCombatiente().atkDP1(rival);
 					break;
 				case 2:
-					turnoRealizado=jugador.getEquipo().get(jugador.getDigimonActual()).atkDP2(rival);
+					turnoRealizado=jugador.getDigimonCombatiente().atkDP2(rival);
 					break;
 				case 3:
 					if(jugador.capturarDigimon(rival)) {
