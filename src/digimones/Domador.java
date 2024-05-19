@@ -37,7 +37,7 @@ public class Domador {
 	public boolean capturarDigimon(Digimon rival) {
 		
 		if(equipo.size()>2) {
-			System.err.println("El equipo está lleno...");	
+			System.err.println("El equipo está lleno...");
 			return false;
 		}
 		
@@ -47,7 +47,7 @@ public class Domador {
 		}
 		
 		if(equipo.add(rival)) {
-			System.out.println("Has capturado un digimon:\n"+rival);
+			System.out.println("Has capturado un digimon: "+rival);
 			return true;
 		}
 		return false;
@@ -85,19 +85,24 @@ public class Domador {
 		
 		System.out.println("Elige el próximo combatiente...");
 		listarEquipo();
-		System.out.println("0.- Cancelar");
+		System.out.println(" 0.- Cancelar");
 		
 		int opt=Teclado.nextInt();
+		
+		if(opt==0) {
+			return;
+		}else if(opt<0||opt>equipo.size()) {
+			System.out.println("Ese digimon no existe");
+			return;
+		}
 		
 		if(opt==(digimonActual+1)) {
 			System.out.println("No puedes cambiar al digimon que estás usando...");
 			return;
 		}
 		
-		if(opt==0) {
-			return;
-		}else if(opt<0||opt>equipo.size()) {
-			System.out.println("Ese digimon no existe");
+		if(equipo.get(opt-1).getSalud()<=0) {
+			System.out.println("Este digimon no está en condiciones de pelear...");
 			return;
 		}
 		
@@ -108,9 +113,12 @@ public class Domador {
 	public void listarEquipo() {
 		
 		for(int i=0;i<equipo.size();i++) {
-			System.out.println(" "+(i+1)+".-"+equipo.get(i));
-		}
-		
+			if(i==digimonActual) {
+				System.out.println(" *"+(i+1)+".- "+equipo.get(i)+"*");
+			}else {
+				System.out.println(" "+(i+1)+".- "+equipo.get(i));	
+			}			
+		}	
 	}
 	
 	// Getters&Setters
@@ -147,6 +155,25 @@ public class Domador {
 		}
 		
 		return "Domador: "+nombre+"\nEquipo:"+team;
+	}
+
+	public boolean ganador() {
+		
+		boolean agumon=false;
+		boolean gabumon=false;
+		boolean patamon=false;
+		
+		for(Digimon aux:equipo) {
+			
+			if(aux.getNombre().equalsIgnoreCase("agumon")) {
+				agumon=true;
+			}else if(aux.getNombre().equalsIgnoreCase("gabumon")) {
+				gabumon=true;
+			}else if(aux.getNombre().equalsIgnoreCase("patamon")) {
+				patamon=true;
+			}	
+		}	
+		return agumon&&gabumon&&patamon;
 	}
 	
 }

@@ -3,13 +3,12 @@ package digimones;
 public class App {
 
 	public static void main(String[] args) {
-		
+	
 		int menuPrincipal=-1;
-		BatallaDigital bd=null;
-		System.out.println("Introduce tu nombre de domador");
 		
+		System.out.println("Introduce tu nombre de domador");
 		Domador jugador=new Domador(Teclado.nextLine());
-
+		
 		System.out.println("Has recibido un digimon inicial!!!");
 		System.out.println(jugador.getEquipo().get(0));
 		
@@ -25,7 +24,7 @@ public class App {
 			 switch(menuPrincipal) {
 				 case 1:
 					 
-					 bd=new BatallaDigital(jugador);
+					 BatallaDigital bd=new BatallaDigital(jugador);
 					 bd.batalla();
 					 bd=null;
 					 
@@ -38,8 +37,12 @@ public class App {
 					 break;
 			 }
 			 
-		}while(menuPrincipal!=2);
-		
+		}while(menuPrincipal!=2 && jugador.estanVivos() && !jugador.ganador());
+		 
+		 if(jugador.ganador()) {
+			 System.out.println("Felicidades has completado el reto de la Digivice!!!");
+		 }else if(!jugador.estanVivos()) {
+			 System.out.println("Game Over, suerte en tu próxima aventura...");
+		 }
 	}
-
 }

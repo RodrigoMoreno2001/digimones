@@ -22,9 +22,12 @@ public class BatallaDigital {
 	
 	public void batalla() {
 		int opt=-1;
-		do {
+		while(rival.getSalud()>0 && jugador.estanVivos()&&!captura) {
 			
-			System.out.println("Estás contra: "+rival);
+			while(jugador.getEquipo().get(jugador.getDigimonActual()).getSalud()<=0) jugador.cambiarDigimon();
+			
+			System.out.println("Estás contra: "+rival.getNombre()+" LVL: "+rival.getNivel()+" HP: "+rival.getSalud());
+			System.out.println("Qué debería hacer "+jugador.getEquipo().get(jugador.getDigimonActual())+"\n");
 			
 			System.out.println("""
 					1.- Luchar
@@ -37,7 +40,9 @@ public class BatallaDigital {
 			switch(opt) {
 				
 				case 1:
-					lucha();
+					if(lucha()) {
+						luchaCPU();	
+					}
 					break;
 				case 2:
 					jugador.cambiarDigimon();
@@ -50,30 +55,81 @@ public class BatallaDigital {
 					break;
 			}
 			
-		}while(rival.getSalud()>0 && jugador.estanVivos()&&!captura);				
-	}
-
-	private void lucha() {
-
-		System.out.println("""
-				1.- Ataque básico
-				2.- Ataque especial
-				3.- Capturar
-				""");
-		switch(Teclado.nextInt()) {
-			case 1:
-				jugador.getEquipo().get(jugador.getDigimonActual()).atkDP1(rival);
-				break;
-			case 2:
-				jugador.getEquipo().get(jugador.getDigimonActual()).atkDP2(rival);
-				break;
-			case 3:
-				if(jugador.capturarDigimon(rival)) captura=true;
-				break;
-			default:
-				System.out.println("Elige una opción válida...");
-				break;
+		}
+		
+		if(rival.getSalud()<=0) {
+			System.out.println("Has derrotado a un "+rival.getNombre()+" LVL "+rival.getNivel()+"...");
+		}
+		
+		if(jugador.getEquipo().get(jugador.getDigimonActual()).getSalud()<=0) {
+			System.out.println("Tu "+jugador.getEquipo().get(jugador.getDigimonActual()).getNombre()+" LVL: "+jugador.getEquipo().get(jugador.getDigimonActual()).getNivel()+" ha sido derrotado...");
+		}
+		
+		if(!jugador.estanVivos()) {
+			System.out.println("Ninguno de tus digimon puede seguir combatiendo...");
+			return;
 		}
 	}
-	
+
+	private void luchaCPU() {
+
+		if(rival.getSalud()<=0||captura) {
+			return;
+		}
+		
+		int random=(int) (Math.random()*10);
+		
+		if(random==3) {
+			System.out.println(rival.getNombre()+" LVL: "+rival.getNivel()+" ha fallado su ataque...");
+			return;
+		}
+		
+		if(random==5) {
+			System.out.println("Tu "+jugador.getEquipo().get(jugador.getDigimonActual()).getNombre()+" LVL: "+jugador.getEquipo().get(jugador.getDigimonActual()).getNivel()+" ha esquivado el ataque enemigo...");
+			return;
+		}
+		
+		if(random%2==0) {
+			rival.atkDP1(jugador.getEquipo().get(jugador.getDigimonActual()));
+		}else {
+			rival.atkDP2(jugador.getEquipo().get(jugador.getDigimonActual()));
+		}
+			
+	}
+
+	private boolean lucha() {
+		
+		boolean turnoRealizado=false;
+		while(!turnoRealizado) {
+			
+			System.out.println("""
+					1.- Ataque básico
+					2.- Ataque especial
+					3.- Capturar
+					0.- Atrás
+					""");
+			
+			switch(Teclado.nextInt()) {
+				case 0:
+					return false;
+				case 1:
+					turnoRealizado=jugador.getEquipo().get(jugador.getDigimonActual()).atkDP1(rival);
+					break;
+				case 2:
+					turnoRealizado=jugador.getEquipo().get(jugador.getDigimonActual()).atkDP2(rival);
+					break;
+				case 3:
+					if(jugador.capturarDigimon(rival)) {
+						captura=true;
+						turnoRealizado=true;
+					}
+					break;
+				default:
+					System.out.println("Elige una opción válida...");
+					break;
+			}
+			
+		}
+		return turnoRealizado;		
+	}
 }

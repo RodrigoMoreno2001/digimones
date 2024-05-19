@@ -30,22 +30,37 @@ public class Digimon {
 	
 	// Métodos
 	
-	public void atkDP1(Digimon rival) {
+	public boolean atkDP1(Digimon rival) {
+		
+		if(dp1<=0) {
+			System.out.println("Este movimiento no está disponible");
+			return false;
+		}
 		
 		this.dp1-=1;
 		rival.setSalud(rival.getSalud()-this.ataque);
 		
 		if(rival.getSalud()<0) rival.setSalud(0);
 
-		
+		System.out.println(nombre+" LVL: "+nivel+" ha atacado a "+rival.nombre+" LVL: "+rival.nivel);
+		return true;
 	}
 	
-	public void atkDP2(Digimon rival) {
+	public boolean atkDP2(Digimon rival) {
+		
+		if(dp2<=0) {
+			System.out.println("Este movimiento no está disponible");
+			return false;
+		}
 		
 		this.dp2-=2;
+		
 		rival.setSalud(rival.getSalud()-this.ataque*2);
+		
 		if(rival.getSalud()<0) rival.setSalud(0);
 		
+		System.out.println(nombre+" LVL: "+nivel+" ha atacado gravemente a "+rival.nombre+" LVL: "+rival.nivel);
+		return true;
 	}
 	
 	
@@ -102,7 +117,7 @@ public class Digimon {
 	@Override
 	public String toString() {
 
-		return nombre+" LVL: "+nivel+" ATK: "+ataque+" HP: "+salud+" DP1: "+dp1+" DP2: "+dp2+"\n";
+		return nombre+" LVL: "+nivel+" ATK: "+ataque+" HP: "+salud+" DP1: "+dp1+" DP2: "+dp2;
 		
 	}
 	
