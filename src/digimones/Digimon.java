@@ -1,5 +1,9 @@
 package digimones;
 
+/**
+ * Clase encargada de representar un Digimon en mi programa
+ */
+
 public class Digimon {
 	
 	// Atributos
@@ -15,7 +19,9 @@ public class Digimon {
 	
 	// Constructores
 	
-	// digimon random
+	/**
+	 * Este constructor vacío va a crear un digimon aleatorio, con las caracteristicas especificadas por el enunciado
+	 */
 	
 	public Digimon() {
 		
@@ -29,6 +35,13 @@ public class Digimon {
 	}
 	
 	// Métodos
+	
+	/**
+	 * Movimiento de ataque básico de un digimon
+	 * 
+	 * @param rival Digimon objetivo del ataque
+	 * @return {@code true} si se ha podido realizar el movimiento, {@code false} si no
+	 */
 	
 	public boolean atkDP1(Digimon rival) {
 		
@@ -45,6 +58,13 @@ public class Digimon {
 		System.out.println(nombre+" LVL: "+nivel+" ha atacado a "+rival.nombre+" LVL: "+rival.nivel);
 		return true;
 	}
+	
+	/**
+	 * Movimiento de ataque especial de un digimon
+	 * 
+	 * @param rival Digimon objetivo del ataque
+	 * @return {@code true} si se ha podido realizar el movimiento, {@code false} si no
+	 */
 	
 	public boolean atkDP2(Digimon rival) {
 		
@@ -117,7 +137,7 @@ public class Digimon {
 	@Override
 	public String toString() {
 
-		return nombre+" LVL: "+nivel+" ATK: "+ataque+" HP: "+salud+" DP1: "+dp1+" DP2: "+dp2;
+		return nombre+" LVL: "+nivel+" ATK: "+ataque+" HP: "+salud+"/"+(nivel*10)+" DP1: "+dp1+" DP2: "+dp2;
 		
 	}
 }

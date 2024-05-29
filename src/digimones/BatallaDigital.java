@@ -1,5 +1,9 @@
 package digimones;
 
+/**
+ * Esta clase se encarga de hacer posible una batalla entre la CPU y el jugador
+ */
+
 public class BatallaDigital {
 	
 	// Atributos
@@ -9,6 +13,12 @@ public class BatallaDigital {
 	private boolean captura;
 	
 	// Constructores
+	
+	/**
+	 * Recibe un jugador e instancia un digimon rival para dar comienzo a una batalla
+	 * 
+	 * @param jugador 
+	 */
 	
 	public BatallaDigital(Domador jugador) {
 		
@@ -20,13 +30,23 @@ public class BatallaDigital {
 	
 	// Metodos
 	
+	/**
+	 * Contiene toda la lógica de una batalla digimon.
+	 * 
+	 * Mientras el rival tenga salud, no haya sido capturado y nuestro digimons tengan salud,
+	 * seguirá la batalla.
+	 */
+	
 	public void batalla() {
 		int opt=-1;
+		
 		while(rival.getSalud()>0 && jugador.estanVivos()&&!captura) {
+			
+			// detecta si nuestro digimon tiene salud, si no tiene, deberemos cambiar de digimon
 			
 			while(jugador.getDigimonCombatiente().getSalud()<=0) jugador.cambiarDigimon();
 			
-			System.out.println("Estás contra: "+rival.getNombre()+" LVL: "+rival.getNivel()+" HP: "+rival.getSalud());
+			System.out.println("Estás contra: "+rival.getNombre()+" LVL: "+rival.getNivel()+" HP: "+rival.getSalud()+"/"+(rival.getNivel()*10));
 			System.out.println("Digimon combatiente: "+jugador.getDigimonCombatiente()+"\n");
 			
 			System.out.println("""
@@ -71,6 +91,11 @@ public class BatallaDigital {
 		}
 	}
 
+	/**
+	 * Este método va a generar un número random y apartir de este número va a decidir el ataque
+	 * usado por el rival
+	 */
+	
 	private void luchaCPU() {
 
 		if(rival.getSalud()<=0||captura) {
@@ -79,10 +104,16 @@ public class BatallaDigital {
 		
 		int random=(int) (Math.random()*10);
 		
+		// este if hace que el rival falle su ataque,
+		// además resta una probabilidad de que un rival realice un atkDP2
+		
 		if(random==3) {
 			System.out.println(rival.getNombre()+" LVL: "+rival.getNivel()+" ha fallado su ataque...");
 			return;
 		}
+		
+		// este if hace que tu digimon esquive el ataque,
+		// además resta una probabilidad de que un rival realice un atkDP2
 		
 		if(random==5) {
 			System.out.println("Tu "+jugador.getDigimonCombatiente().getNombre()+" LVL: "+jugador.getDigimonCombatiente().getNivel()+" ha esquivado el ataque enemigo...");
@@ -97,9 +128,17 @@ public class BatallaDigital {
 			
 	}
 
+	/**
+	 * Menú de lucha del usuario, aquí deberá decidir un usuario su próximo movimiento<br>
+	 * <br>
+	 * Si devolviese "true" el digimon rival atacará, de otro modo, no atacará
+	 * @return {@code True} si el movimiento ha sido realizado,<br>{@code False} si el movimiento no ha sido completado
+	 */
+	
 	private boolean lucha() {
 		
 		boolean turnoRealizado=false;
+		
 		while(!turnoRealizado) {
 			
 			System.out.println("""
@@ -127,8 +166,7 @@ public class BatallaDigital {
 				default:
 					System.out.println("Elige una opción válida...");
 					break;
-			}
-			
+			}	
 		}
 		return turnoRealizado;		
 	}

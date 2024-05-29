@@ -2,6 +2,11 @@ package digimones;
 
 import java.util.ArrayList;
 
+/**
+ * Esta clase es la representacion del jugador
+ * 
+ */
+
 public class Domador {
 
 	// atributos
@@ -12,27 +17,42 @@ public class Domador {
 	
 	// constructores
 	
+	/**
+	 * Recibe el nombre de domador y establece de forma aleatoria un digimon inicial
+	 * 
+	 * @param nombre
+	 */
+	
 	public Domador(String nombre) {
 		
 		this.nombre=nombre;
 		this.digimonActual=0;
 		this.equipo=new ArrayList<>();
-		getEquipo().add(new Digimon());
-		setEquipo(equipo);
-		
+		getEquipo().add(new Digimon());	
 	}
 
 	// Metodos
+	
+	/**
+	 * Comprueba el estado de salud de todo mi equipo
+	 * 
+	 * @return {@code true} Si hay uno o mas digimon vivos.<br>{@code false} Si están todos muertos.
+	 */
 	
 	public boolean estanVivos() {
 
 		for(Digimon aux:equipo) {
 			if(aux.getSalud()>0) return true;
-		}
-		
+		}	
 		return false;
-		
 	}
+	
+	/**
+	 * Evalúa si el digimon puede ser capturado y si la evaluación resulta positiva, se agrega el digimon al equipo
+	 * 
+	 * @param rival Digimon a capturar
+	 * @return {@code true} Si la captura es posible.<br>{@code false} Si la captura no es posible.
+	 */
 	
 	public boolean capturarDigimon(Digimon rival) {
 		
@@ -53,6 +73,11 @@ public class Domador {
 		return false;
 		
 	}
+	
+	/**
+	 * Pide que selecciones un digimon, se evalua si este digimon seleccionado puede ser liberado<br>
+	 * si puede serlo, lo eliminará del equipo
+	 */
 	
 	public void liberarDigimon() {
 		
@@ -81,6 +106,11 @@ public class Domador {
 		System.out.println("Has liberado a tu: "+aux);
 	}
 
+	/**
+	 * Pide que selecciones un digimon, se evalua si este digimon seleccionado puede ser cambiado<br>
+	 * si puede serlo, se actualizará la variable de clase "digimonActual"
+	 */
+	
 	public void cambiarDigimon() {
 		
 		System.out.println("Elige el próximo combatiente...");
@@ -110,6 +140,10 @@ public class Domador {
 		
 	}
 	
+	/**
+	 * Lista el equipo, el Digimon que esté actualmente seleccionado será resaltado con "*-----*"
+	 */
+	
 	public void listarEquipo() {
 		
 		for(int i=0;i<equipo.size();i++) {
@@ -119,6 +153,31 @@ public class Domador {
 				System.out.println(" "+(i+1)+".- "+equipo.get(i));	
 			}			
 		}	
+	}
+	
+	/**
+	 * Evalúa si los digimones en el equipo son los requeridos o no
+	 * 
+	 * @return  {@code true} Si tiene los digimones requeridos.<br>{@code false} Si NO tiene los digimones requeridos.
+	 */
+	
+	public boolean ganador() {
+		
+		boolean agumon=false;
+		boolean gabumon=false;
+		boolean patamon=false;
+		
+		for(Digimon aux:equipo) {
+			
+			if(aux.getNombre().equalsIgnoreCase("agumon")) {
+				agumon=true;
+			}else if(aux.getNombre().equalsIgnoreCase("gabumon")) {
+				gabumon=true;
+			}else if(aux.getNombre().equalsIgnoreCase("patamon")) {
+				patamon=true;
+			}	
+		}	
+		return agumon&&gabumon&&patamon;
 	}
 	
 	// Getters&Setters
@@ -163,23 +222,4 @@ public class Domador {
 		return "Domador: "+nombre+"\nEquipo:"+team;
 	}
 
-	public boolean ganador() {
-		
-		boolean agumon=false;
-		boolean gabumon=false;
-		boolean patamon=false;
-		
-		for(Digimon aux:equipo) {
-			
-			if(aux.getNombre().equalsIgnoreCase("agumon")) {
-				agumon=true;
-			}else if(aux.getNombre().equalsIgnoreCase("gabumon")) {
-				gabumon=true;
-			}else if(aux.getNombre().equalsIgnoreCase("patamon")) {
-				patamon=true;
-			}	
-		}	
-		return agumon&&gabumon&&patamon;
-	}
-	
 }

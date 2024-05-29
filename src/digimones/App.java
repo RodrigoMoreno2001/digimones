@@ -1,7 +1,17 @@
 package digimones;
 
+/**
+ * Clase contenedora del método main y metodos de comprobaciones e impresión del menú 
+ */
+
 public class App {
 
+	/**
+	 * Aquí se va a ejecutar la aplicacion
+	 * 
+	 * @param args
+	 */
+	
 	public static void main(String[] args) {
 	
 		int menuPrincipal=-1;
@@ -39,6 +49,12 @@ public class App {
 		 
 	}
 	
+	/**
+	 * Este método debe usarse una vez terminado el juego, comprobará el resultado de la partida
+	 * 
+	 * @param jugador
+	 */
+	
 	private static void comprobaciones(Domador jugador) {
 		
 		 if(jugador.ganador()) {
@@ -48,6 +64,12 @@ public class App {
 		 }	 
 		 
 	}
+	
+	/**
+	 * Contiene la funcionalidad relacionada a la obtención del digimon inicial
+	 * 
+	 * @return Objeto tipo Domador (Jugador construido)
+	 */
 	
 	private static Domador menuInicial() {		
 		
