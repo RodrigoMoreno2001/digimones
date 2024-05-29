@@ -1,6 +1,10 @@
 package digimones;
 
 /**
+ * @author rodri_2
+ */
+
+/**
  * Clase encargada de representar un Digimon en mi programa
  */
 

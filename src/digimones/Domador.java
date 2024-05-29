@@ -3,6 +3,10 @@ package digimones;
 import java.util.ArrayList;
 
 /**
+ * @author rodri_2
+ */
+
+/**
  * Esta clase es la representacion del jugador
  * 
  */

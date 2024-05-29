@@ -1,6 +1,10 @@
 package digimones;
 
 /**
+ * @author rodri_2
+ */
+
+/**
  * Clase contenedora del método main y metodos de comprobaciones e impresión del menú 
  */
 

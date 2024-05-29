@@ -1,6 +1,10 @@
 package digimones;
 
 /**
+ * @author rodri_2
+ */
+
+/**
  * Esta clase se encarga de hacer posible una batalla entre la CPU y el jugador
  */
 

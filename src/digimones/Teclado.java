@@ -3,6 +3,9 @@ package digimones;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * @author rodri_2
+ */
 
 /**
  * Esta clase busca solventar el problema al cambiar de tipos entre scanneres
